@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package chat;
+
+option go_package = "chat_app/proto;proto"; 
+
+// service defination
+service ChatService {
+    rpc Join(JoinRequest) returns (JoinResponse);
+    rpc Chat(stream ChatMessage) returns (stream ChatMessage);
+}
+
+message ChatMessage {
+    string user = 1;
+    string msg = 2;
+    int64 timestamp = 3;
+}
+
+message JoinRequest {
+    string user = 1;
+}
+
+message JoinResponse {
+    bool success = 1;
+    string msg = 2;
+}
